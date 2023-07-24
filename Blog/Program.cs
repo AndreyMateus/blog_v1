@@ -15,5 +15,8 @@ public class Program
         // TODO: criando query simples, através do Ef core criamos uma Classe/model chamada PostWithTagsCount, que terá um nome e um Contador, basicamente esse model simulará uma QUERY no banco, retornará o número de quantas Tags tem em um post, e trará o nome da tag.
 
 
+        // TODO: Adicionar um projeto contendo os testes do blog
+        
+        // TODO: Adiciona o Projeto ao meus projetos no meu site de portfólio
     }
 }

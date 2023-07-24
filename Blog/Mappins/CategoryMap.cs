@@ -19,12 +19,13 @@ public class CategoryMap : IEntityTypeConfiguration<Category>
         .HasColumnName("Name")
         .HasColumnType("VARCHAR")
         .HasMaxLength(80)
-        .IsRequired();
+        .IsRequired(); 
 
         builder.Property(builderCategory => builderCategory.Slug)
         .HasColumnName("Slug")
         .HasColumnType("VARCHAR")
         .HasMaxLength(80)
         .IsRequired();
+
     }
 }

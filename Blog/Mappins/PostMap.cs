@@ -55,9 +55,10 @@ public class PostMap : IEntityTypeConfiguration<Post>
 
         // TODO: Conferir os Deletes e Adicionar aqui
         builder.HasOne(post => post.Category)
-        .WithMany(category => category.Posts)
+        .WithMany(navigationExpression: category => category.Posts)
         .HasForeignKey(post => post.Id)
-        .HasConstraintName("FK_Post_Category");
+        .HasConstraintName("FK_Post_Category")
+        .OnDelete(DeleteBehavior.Restrict);
     
         builder.HasOne(post => post.User)
         .WithMany(user => user.Posts)
