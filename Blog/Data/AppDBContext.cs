@@ -15,7 +15,8 @@ public class AppDBContext : DbContext
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("");
+        // Default Connection - Windows Autentication
+        optionsBuilder.UseSqlServer("Server=localhost;Database=Blog2;Trusted_Connection=True;");
     }
    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -25,8 +26,5 @@ public class AppDBContext : DbContext
         modelBuilder.ApplyConfiguration(new RoleMap());
         modelBuilder.ApplyConfiguration(new TagMap());
         modelBuilder.ApplyConfiguration(new UserMap());
-
-        
-
     }
 }

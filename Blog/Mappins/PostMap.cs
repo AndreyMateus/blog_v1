@@ -44,46 +44,46 @@ public class PostMap : IEntityTypeConfiguration<Post>
         builder.Property(builderCategory => builderCategory.CreateDate)
         .HasColumnName("CreateDate")
         .HasColumnType("DATETIME")
-        .HasDefaultValueSql("GETDATE()")// TODO: CONFERIR se a função está certa
+        .HasDefaultValueSql("GETDATE()")
         .IsRequired();
 
         builder.Property(builderCategory => builderCategory.LastUpdateDate)
         .HasColumnName("LastUpdateDate")
         .HasColumnType("SMALLDATETIME")
         .IsRequired();
-
-
         
         builder.HasOne(post => post.Category)
-        .WithMany(navigationExpression: category => category.Posts)
-        .HasForeignKey(post => post.Id)
+        .WithMany()
+        .HasForeignKey("PostId")
         .HasConstraintName("FK_Post_Category")
         .OnDelete(DeleteBehavior.Restrict);
     
         builder.HasOne(post => post.User)
         .WithMany(user => user.Posts)
         .HasForeignKey(post => post.Id)
-        .HasConstraintName("FK_PostUser");
+        .HasConstraintName("FK_PostUser")
+        .OnDelete(DeleteBehavior.Restrict);
        
        builder.HasMany(post => post.Tags)
        .WithMany(tag => tag.Posts)
        .UsingEntity<Dictionary<string, Object>>(
         "TagPost",
-
-   post => 
+        post => 
         post.HasOne<Tag>()
         .WithMany()
         .HasForeignKey("PostId")
         .HasConstraintName("FK_PostTag_PostId")
         .OnDelete(DeleteBehavior.Cascade),
-
+        
         tag => 
         tag.HasOne<Post>()
         .WithMany()
         .HasForeignKey("TagId")
         .HasConstraintName("FK_TagPost_TagId")
-        .OnDelete(DeleteBehavior.Cascade)
-       );
-        
+        .OnDelete(DeleteBehavior.Cascade) 
+       );    
+       
+       
+       
     }
 }

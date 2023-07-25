@@ -53,5 +53,28 @@ public class UserMap : IEntityTypeConfiguration<User>
         .HasColumnType("VARCHAR")
         .HasMaxLength(80)
         .IsRequired();
+
+        builder.HasMany(builderUser => builderUser.Posts)
+            .WithOne(post => post.User)
+            .HasForeignKey(user => user.Id)
+            .HasConstraintName("FK_UserPost_UserId")
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasMany<Role>()
+            .WithMany(role => role.Users)
+            .UsingEntity<Dictionary<string, Object>>(
+                "RoleUser",
+                user => user.HasOne<Role>()
+                    .WithMany()
+                    .HasForeignKey("UserId")
+                    .HasConstraintName("FK_UserRole_UserId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                ,
+                role => role.HasOne<User>()
+                    .WithMany()
+                    .HasForeignKey("RoleId")
+                    .HasConstraintName("FK_RoleUser_RoleId")
+                    .OnDelete(DeleteBehavior.Cascade)
+            );
     }
 }

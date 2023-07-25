@@ -15,17 +15,24 @@ public class CategoryMap : IEntityTypeConfiguration<Category>
         .ValueGeneratedOnAdd()
         .UseIdentityColumn();
 
-        builder.Property(builderCategory => builderCategory.Name )
+        builder.Property(builderCategory => builderCategory.Name)
         .HasColumnName("Name")
         .HasColumnType("VARCHAR")
         .HasMaxLength(80)
-        .IsRequired(); 
+        .IsRequired();
 
         builder.Property(builderCategory => builderCategory.Slug)
         .HasColumnName("Slug")
         .HasColumnType("VARCHAR")
         .HasMaxLength(80)
         .IsRequired();
-        
+
+
+        builder.HasOne(builderCategory => 
+                builderCategory.Posts)
+                .WithOne()
+                .HasForeignKey("CategoryId")
+                .HasConstraintName("FK_CategoryPost_CategoryId")
+                .OnDelete(DeleteBehavior.Cascade);
     }
 }
