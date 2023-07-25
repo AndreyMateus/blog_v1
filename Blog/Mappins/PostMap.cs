@@ -53,7 +53,7 @@ public class PostMap : IEntityTypeConfiguration<Post>
         .IsRequired();
 
 
-        // TODO: Conferir os Deletes e Adicionar aqui
+        
         builder.HasOne(post => post.Category)
         .WithMany(navigationExpression: category => category.Posts)
         .HasForeignKey(post => post.Id)

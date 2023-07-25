@@ -26,6 +26,6 @@ public class CategoryMap : IEntityTypeConfiguration<Category>
         .HasColumnType("VARCHAR")
         .HasMaxLength(80)
         .IsRequired();
-
+        
     }
 }

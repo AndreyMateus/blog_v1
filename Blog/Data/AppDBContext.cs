@@ -24,8 +24,9 @@ public class AppDBContext : DbContext
         modelBuilder.ApplyConfiguration(new PostMap());
         modelBuilder.ApplyConfiguration(new RoleMap());
         modelBuilder.ApplyConfiguration(new TagMap());
-        modelBuilder.ApplyConfiguration(configuration: new UserMap());
+        modelBuilder.ApplyConfiguration(new UserMap());
 
-    
+        
+
     }
 }
