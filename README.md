@@ -9,8 +9,8 @@ Um projeto de um blog que contém Postagens
 ## Oque são Tabelas Virtuais e porque usei elas ao invés de criar um arquivo(model)
 
 ## Pré-requistos para Rodar o Projeto 
-    <p>.NET RUN TIME 6.0</p>
-    <p>SQL SERVER</p>
+    .NET RUN TIME 6.0
+     SQL SERVER
 ## Como Baixar e Rodar o projeto
 
 
