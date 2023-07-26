@@ -294,7 +294,7 @@ namespace Blog.Migrations
                     b.HasOne("Blog.Models.Tag", null)
                         .WithMany()
                         .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("FK_PostTag_PostId");
 

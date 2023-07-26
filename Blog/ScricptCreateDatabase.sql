@@ -79,7 +79,7 @@ CREATE TABLE [TagPost] (
     [PostId] int NOT NULL,
     [TagId] int NOT NULL,
     CONSTRAINT [PK_TagPost] PRIMARY KEY ([PostId], [TagId]),
-    CONSTRAINT [FK_PostTag_PostId] FOREIGN KEY ([PostId]) REFERENCES [Tag] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_PostTag_PostId] FOREIGN KEY ([PostId]) REFERENCES [Tag] ([Id]) ON DELETE NO ACTION,
     CONSTRAINT [FK_TagPost_TagId] FOREIGN KEY ([TagId]) REFERENCES [Post] ([Id]) ON DELETE CASCADE
 );
 GO
@@ -100,7 +100,7 @@ CREATE INDEX [IX_TagPost_TagId] ON [TagPost] ([TagId]);
 GO
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20230726102250_CreateDatabase', N'6.0.20');
+VALUES (N'20230726103420_CreateDatabase', N'6.0.20');
 GO
 
 COMMIT;

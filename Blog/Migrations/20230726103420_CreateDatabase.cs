@@ -153,7 +153,7 @@ namespace Blog.Migrations
                         column: x => x.PostId,
                         principalTable: "Tag",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_TagPost_TagId",
                         column: x => x.TagId,

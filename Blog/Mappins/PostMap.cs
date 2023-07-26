@@ -73,7 +73,7 @@ public class PostMap : IEntityTypeConfiguration<Post>
         .WithMany()
         .HasForeignKey("PostId")
         .HasConstraintName("FK_PostTag_PostId")
-        .OnDelete(DeleteBehavior.Cascade),
+        .OnDelete(DeleteBehavior.Restrict),
         
         tag => 
         tag.HasOne<Post>()
