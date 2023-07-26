@@ -55,13 +55,13 @@ public class PostMap : IEntityTypeConfiguration<Post>
         builder.HasOne(post => post.Category)
         .WithMany()
         .HasForeignKey("PostId")
-        .HasConstraintName("FK_Post_Category")
+        .HasConstraintName("FK_PostCategory_PostId")
         .OnDelete(DeleteBehavior.Restrict);
     
         builder.HasOne(post => post.User)
         .WithMany(user => user.Posts)
-        .HasForeignKey(post => post.Id)
-        .HasConstraintName("FK_PostUser")
+        .HasForeignKey("PostId")
+        .HasConstraintName("FK_PostUser_PostId")
         .OnDelete(DeleteBehavior.Restrict);
        
        builder.HasMany(post => post.Tags)
@@ -81,9 +81,6 @@ public class PostMap : IEntityTypeConfiguration<Post>
         .HasForeignKey("TagId")
         .HasConstraintName("FK_TagPost_TagId")
         .OnDelete(DeleteBehavior.Cascade) 
-       );    
-       
-       
-       
+       );
     }
 }

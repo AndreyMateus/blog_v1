@@ -60,7 +60,7 @@ public class UserMap : IEntityTypeConfiguration<User>
             .HasConstraintName("FK_UserPost_UserId")
             .OnDelete(DeleteBehavior.Cascade);
 
-        builder.HasMany<Role>()
+        builder.HasMany(user => user.Roles)
             .WithMany(role => role.Users)
             .UsingEntity<Dictionary<string, Object>>(
                 "RoleUser",

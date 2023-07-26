@@ -11,7 +11,7 @@ public class CategoryMap : IEntityTypeConfiguration<Category>
         builder.ToTable("Category");
         builder.HasKey(category => category.Id);
 
-        builder.Property("Id")
+        builder.Property(category => category.Id)
         .ValueGeneratedOnAdd()
         .UseIdentityColumn();
 
@@ -26,9 +26,8 @@ public class CategoryMap : IEntityTypeConfiguration<Category>
         .HasColumnType("VARCHAR")
         .HasMaxLength(80)
         .IsRequired();
-
-
-        builder.HasOne(builderCategory => 
+        
+        builder.HasMany(builderCategory => 
                 builderCategory.Posts)
                 .WithOne()
                 .HasForeignKey("CategoryId")

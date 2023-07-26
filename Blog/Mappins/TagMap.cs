@@ -14,7 +14,7 @@ public class TagMap : IEntityTypeConfiguration<Tag>
         builder.Property(builderTag => builderTag.Id)
         .ValueGeneratedOnAdd()
         .UseIdentityColumn();
-
+        
         builder.Property(builderTag => builderTag.Name)
         .HasColumnName("Name")
         .HasColumnType("NVARCHAR")
