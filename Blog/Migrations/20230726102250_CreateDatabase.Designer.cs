@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blog.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20230726053104_CriacaoBanco")]
-    partial class CriacaoBanco
+    [Migration("20230726102250_CreateDatabase")]
+    partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -97,11 +97,16 @@ namespace Blog.Migrations
                         .HasColumnType("VARCHAR(160)")
                         .HasColumnName("Title");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Post", (string)null);
                 });
@@ -244,19 +249,25 @@ namespace Blog.Migrations
                         .IsRequired()
                         .HasConstraintName("FK_CategoryPost_CategoryId");
 
-                    b.HasOne("Blog.Models.User", "User")
-                        .WithMany("Posts")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_UserPost_UserId");
-
                     b.HasOne("Blog.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("FK_PostCategory_PostId");
+
+                    b.HasOne("Blog.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("FK_PostUser_PostId");
+
+                    b.HasOne("Blog.Models.User", null)
+                        .WithMany("Posts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasConstraintName("FK_UserPost_UserId");
 
                     b.Navigation("Category");
 
@@ -268,14 +279,14 @@ namespace Blog.Migrations
                     b.HasOne("Blog.Models.User", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("FK_RoleUser_RoleId");
 
                     b.HasOne("Blog.Models.Role", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("FK_UserRole_UserId");
                 });

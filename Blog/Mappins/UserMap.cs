@@ -54,9 +54,10 @@ public class UserMap : IEntityTypeConfiguration<User>
         .HasMaxLength(80)
         .IsRequired();
 
-        builder.HasMany(builderUser => builderUser.Posts)
-            .WithOne(post => post.User)
-            .HasForeignKey(user => user.Id)
+        
+        builder.HasMany(user => user.Posts)
+            .WithOne()
+            .HasForeignKey("UserId")
             .HasConstraintName("FK_UserPost_UserId")
             .OnDelete(DeleteBehavior.Cascade);
 
@@ -68,13 +69,13 @@ public class UserMap : IEntityTypeConfiguration<User>
                     .WithMany()
                     .HasForeignKey("UserId")
                     .HasConstraintName("FK_UserRole_UserId")
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.Restrict)
                 ,
                 role => role.HasOne<User>()
                     .WithMany()
                     .HasForeignKey("RoleId")
                     .HasConstraintName("FK_RoleUser_RoleId")
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.Restrict)
             );
     }
 }

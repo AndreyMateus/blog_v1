@@ -57,9 +57,9 @@ public class PostMap : IEntityTypeConfiguration<Post>
         .HasForeignKey("PostId")
         .HasConstraintName("FK_PostCategory_PostId")
         .OnDelete(DeleteBehavior.Restrict);
-    
+        
         builder.HasOne(post => post.User)
-        .WithMany(user => user.Posts)
+        .WithMany()
         .HasForeignKey("PostId")
         .HasConstraintName("FK_PostUser_PostId")
         .OnDelete(DeleteBehavior.Restrict);

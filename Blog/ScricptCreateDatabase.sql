@@ -57,10 +57,12 @@ CREATE TABLE [Post] (
     [LastUpdateDate] SMALLDATETIME NOT NULL,
     [PostId] int NOT NULL,
     [CategoryId] int NOT NULL,
+    [UserId] int NULL,
     CONSTRAINT [PK_Post] PRIMARY KEY ([Id]),
     CONSTRAINT [FK_CategoryPost_CategoryId] FOREIGN KEY ([CategoryId]) REFERENCES [Category] ([Id]) ON DELETE CASCADE,
     CONSTRAINT [FK_PostCategory_PostId] FOREIGN KEY ([PostId]) REFERENCES [Category] ([Id]) ON DELETE NO ACTION,
-    CONSTRAINT [FK_UserPost_UserId] FOREIGN KEY ([Id]) REFERENCES [User] ([Id]) ON DELETE CASCADE
+    CONSTRAINT [FK_PostUser_PostId] FOREIGN KEY ([PostId]) REFERENCES [User] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_UserPost_UserId] FOREIGN KEY ([UserId]) REFERENCES [User] ([Id]) ON DELETE CASCADE
 );
 GO
 
@@ -68,8 +70,8 @@ CREATE TABLE [RoleUser] (
     [RoleId] int NOT NULL,
     [UserId] int NOT NULL,
     CONSTRAINT [PK_RoleUser] PRIMARY KEY ([RoleId], [UserId]),
-    CONSTRAINT [FK_RoleUser_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [User] ([Id]) ON DELETE CASCADE,
-    CONSTRAINT [FK_UserRole_UserId] FOREIGN KEY ([UserId]) REFERENCES [Role] ([Id]) ON DELETE CASCADE
+    CONSTRAINT [FK_RoleUser_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [User] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_UserRole_UserId] FOREIGN KEY ([UserId]) REFERENCES [Role] ([Id]) ON DELETE NO ACTION
 );
 GO
 
@@ -88,6 +90,9 @@ GO
 CREATE INDEX [IX_Post_PostId] ON [Post] ([PostId]);
 GO
 
+CREATE INDEX [IX_Post_UserId] ON [Post] ([UserId]);
+GO
+
 CREATE INDEX [IX_RoleUser_UserId] ON [RoleUser] ([UserId]);
 GO
 
@@ -95,7 +100,7 @@ CREATE INDEX [IX_TagPost_TagId] ON [TagPost] ([TagId]);
 GO
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20230726053104_CriacaoBanco', N'6.0.20');
+VALUES (N'20230726102250_CreateDatabase', N'6.0.20');
 GO
 
 COMMIT;
