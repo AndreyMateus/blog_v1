@@ -11,10 +11,6 @@ public class Post
     public DateTime LastUpdateDate { get; set; }
 
     public Category Category { get; set; }
-    // TODO: public int CategoryId { get; set; } - Devo ou não usar
-    
     public User User{ get; set; }
-    // TODO: public int UserId { get; set; } - Devo ou não usar
-    
     public List<Tag> Tags { get; set; } 
 }
