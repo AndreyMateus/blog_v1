@@ -19,7 +19,6 @@ Backend de um Blog contendo o Mapping pela Fluent API do Ef Core, Utilizando Sql
 
 6. Execute um `dotnet run`
 7. Divirta-se, você poderá consultar os dados/registro das tabelas VIA CLI, pelo ALGORITMO criado por mim, ou utilizando o seu SGBD. 
-8. Também há um projeto de testes caso queira verificar os testes feitos.
 ***
 ## Oque são Tabelas Virtuais e porque usei elas ao invés de criar um arquivo(model)
 São tabelas VIRTUAIS(Que existirão somente em memória), utilizamos o TIPO DICTIONARY<string,Object> para simular uma COLUNA de uma TABELA no BANCO, que é composto por CHAVE(Nome da Coluna), e o Valor(Valor da coluna).
