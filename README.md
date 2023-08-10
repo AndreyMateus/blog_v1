@@ -1,7 +1,7 @@
 # Projeto Blog
 
 ## Oque é o Projeto
-Backend de um Blog contendo o Mapping pela Fluent API do Ef Core, Utilizando SqlServer, Contém também um projeto de Testes utilizando XUnit.
+Backend de um Blog contendo o Mapping pela Fluent API do Ef Core, Utilizando SqlServer.
 
 ***
 ## Pré-requistos para Rodar o Projeto
